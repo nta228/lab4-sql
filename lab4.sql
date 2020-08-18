@@ -1,0 +1,77 @@
+CREATE DATABASE QuanLISinhVien
+	USE QuanLISinhVien
+	go
+
+	--Tạo bảng Lớp
+	CREATE TABLE LOP
+	(
+	 MaLop varchar(10) PRIMARY KEY,
+	 TenLop nvarchar(40) NOT NULL
+	)
+	--Tạo bảng Sinh Viên
+	CREATE TABLE SINHVIEN
+	(
+	 MaSv varchar(10) PRIMARY KEY,
+	 HoTen nvarchar(40) NOT NULL,
+	 NgaySinh date NOT NULL,
+	 GioiTinh nvarchar(4) NOT NULL,
+	 DTB float NOT NULL,
+	 NgayNhapHoc date Not Null,
+	 TrangThaiSv nvarchar(30) null
+	)
+	--Tạo bảng Classdetail
+	CREATE TABLE Classdetail
+	(
+	 MaSv varchar(10) NOT NULL,
+	 Malop varchar(10) NOT NULL, 
+	 CONSTRAINT FK_Classdetail_SINHVIEN FOREIGN KEY (MaSv) REFERENCES SINHVIEN,
+	 CONSTRAINT FK_Classdetail_LOP FOREIGN KEY (MaLop) REFERENCES LOP
+
+	)
+
+	--
+	SELECT *
+	FROM LOP
+
+	INSERT INTO LOP
+	 VALUES('TA01','CNTT1')
+	INSERT INTO LOP
+	 VALUES('TA02','CNTT2')
+	INSERT INTO LOP
+	 VALUES('TA03','CNTT3')
+	INSERT INTO LOP
+	 VALUES('TA04','CNTT4')
+	 INSERT INTO LOP
+	 VALUES('TA05','CNTT5')
+	 --
+	SELECT * 
+	FROM SINHVIEN
+	INSERT INTO SINHVIEN VALUES('SV01',N'Ngô Thừa Ân','2002-5-6',N'Nam',4.5,'2018-4-5',N'Đang Học')
+	INSERT INTO SINHVIEN VALUES('SV02',N'Tôn Ngộ Không','2003-5-7',N'Nam',5.5,'2018-5-4',N'Thôi Học')
+	INSERT INTO SINHVIEN VALUES('SV03',N'Chư Ngộ NĂng','2002-5-4',N'Nam',1.5,'2019-5-6',N'Đang Học')
+	INSERT INTO SINHVIEN VALUES('SV04',N'Xa Tăng','2000-5-5',N'Nam',4.5,'2019-7-8',N'Đang Học')
+	INSERT INTO SINHVIEN VALUES('SV05',N'Từ Thiếu Hoa','2002-5-5',N'Nam',4,'2013-7-8',N'Đang Học')
+	--
+	SELECT * 
+	FROM Classdetail
+	INSERT INTO Classdetail VALUES('SV01','TA01')
+	INSERT INTO Classdetail VALUES('SV02','TA02')
+	INSERT INTO Classdetail VALUES('SV03','TA03')
+	INSERT INTO Classdetail VALUES('SV04','TA04')
+	INSERT INTO Classdetail VALUES('SV05','TA05')
+
+	--
+	SELECT * FROM LOP
+	SELECT * FROM SINHVIEN
+	SELECT * FROM Classdetail
+
+	--
+	DELETE SINHVIEN WHERE DTB >5
+	DELETE SINHVIEN WHERE GioiTinh= N'Nữ'
+	DELETE SINHVIEN WHERE NgayNhapHoc='2018-4-5'
+	DELETE SINHVIEN WHERE TrangThaiSv =N'Thôi Học'
+	--
+	UPDATE SINHVIEN SET DTB = 1
+	WHERE MaSv='SV01'
+	UPDATE SINHVIEN SET GioiTinh = N'Nam'
+	WHERE MaSv='SV01'
